@@ -12,7 +12,7 @@ public:
 	
 	void Init();
 	void Draw(Graphics& gfx, bool flashing); // draw the snake each frame
-	void Update(const Keyboard& kbd);
+	void Update(const Keyboard& kbd, float dt);
 	void Extend();
 	bool CheckCollision(int x, int y); // checks if item at passed coordinates has collided with any segment of the snake
 	bool CheckCollision(bool self); // override function for if snake is checking self for collision
@@ -55,8 +55,8 @@ private:
 	int headXVel; //  x and y velocity, i.e. initially moving left to right
 	int headYVel;
 	
-	static constexpr int framesBetweenUpdates = 15;
-	int updateCounter;
+	float sinceLastUpdate = 0.0f;
+	float frameDelay = 0.2f; // delay between updates in seconds
 	
 	
 	

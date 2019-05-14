@@ -17,8 +17,8 @@ void Snek::Init() {
 	
 	
 	currentSegs = startSegs; // current number of segments
-	startPosX = 1; // starting X position, mid screen
-	startPosY = 1; // starting X position, mid screen
+	startPosX = 10; // starting X position, mid screen
+	startPosY = 10; // starting X position, mid screen
 
 	headXVel = 1; //  x and y velocity, i.e. initially moving left to right
 	headYVel = 0;
@@ -26,8 +26,6 @@ void Snek::Init() {
 	headR = 0;
 	headG = 255;
 	headB = 255;
-	
-	updateCounter = 0;
 	
 		
 	// create our initial snake array - first the head;
@@ -102,7 +100,7 @@ void Snek::Draw(Graphics& gfx, bool flashing)
 
 }
 
-void Snek::Update(const Keyboard& kbd)
+void Snek::Update(const Keyboard& kbd, float dt)
 {
 
 	if (kbd.KeyIsPressed(VK_UP)) {
@@ -137,15 +135,17 @@ void Snek::Update(const Keyboard& kbd)
 	snake[0].xVel = headXVel;
 	snake[0].yVel = headYVel;
 
-	if (updateCounter < framesBetweenUpdates) {
+	sinceLastUpdate += dt;
 
-		updateCounter++;
+if (sinceLastUpdate <= frameDelay) { // now checking to see if frameDelay seconds have passed
+
+		// do nothing
 		
 
 	} else {
 
 		
-		
+		sinceLastUpdate = 0.0f;
 
 		int i = currentSegs - 1;
 		while (i > 0) {
@@ -161,14 +161,7 @@ void Snek::Update(const Keyboard& kbd)
 		}
 		
 		
-		updateCounter = 0;
-
 	
-		
-
-
-	
-
 		snake[0].xPos = snake[0].xPos + (headXVel);
 		snake[0].yPos = snake[0].yPos + (headYVel);
 

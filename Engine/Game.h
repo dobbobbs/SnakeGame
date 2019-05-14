@@ -26,6 +26,7 @@
 #include "Snek.h"
 #include "Food.h"
 #include "Board.h"
+#include "FrameTimer.h"
 
 
 class Game
@@ -55,6 +56,7 @@ private:
 	/********************************/
 	/*  User Variables              */
 	/********************************/
+	FrameTimer ft;
 	Snek snake;
 	Board board;
 	Food food;

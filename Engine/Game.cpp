@@ -60,11 +60,13 @@ bool Game::Collision(int obj0X, int obj0Y, int obj1X, int obj1Y)
 
 void Game::UpdateModel()
 {
+
+	const float dt = ft.Mark();
 	
 	if (!gameOver) {
 
 	
-		snake.Update(wnd.kbd);
+		snake.Update(wnd.kbd, dt);
 
 		if (Collision(snake.GetX(), snake.GetY(), food.GetX(), food.GetY())) {
 
